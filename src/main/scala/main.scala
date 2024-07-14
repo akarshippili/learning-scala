@@ -1,8 +1,15 @@
 package com.akarsh.learning
 
 
-import java.util
+import Planet.{Earth, Mercury, Venus}
 import scala.util.Random
+
+def getPlanetIndex(planet: Planet) = {
+  planet match
+    case Mercury => 1
+    case Venus => 2
+    case Earth => 3
+}
 
 @main
 def main(): Unit = {
@@ -10,13 +17,9 @@ def main(): Unit = {
 
   def nTimes(n:Int) = (value :Int) => {
       val random = new Random()
-      for (_ <- 0 until n) {
-        if (random.nextInt() < value) {
-          println(s"value less than $value")
-        } else {
-          println(s"val greater than or equal to $value")
-        }
-      }
+      for _ <- 0 until n do
+        if (random.nextInt() < value) then println(s"value less than $value")
+        else println(s"val greater than or equal to $value")
   }
 
   val oneTime = nTimes(1)
@@ -34,4 +37,18 @@ def main(): Unit = {
   println(Person("akarsh", "ippili"))
   println(Person(24))
 
+  for
+    i <- 1 to 2
+    j <- 'a' to 'b'
+    k <- 1 to 10 by 5
+  do
+    println(s"i = $i, j = $j, k = $k")
+
+
+  Planet.values
+    .map(planet => (planet, planet.getGravity))
+    .foreach((planet:Planet, gravity:Double) => println(s"planet: $planet -> gravity: $gravity"))
+
+  println(getPlanetIndex(Earth))
+  println(Earth.mass)
 }
