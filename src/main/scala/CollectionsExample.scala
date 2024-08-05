@@ -21,4 +21,23 @@ def collectionExamples(): Unit = {
 
   println(ints1.foldLeft(1)((a: Int, c: Int) => a - c))
   println(ints2.filter((_: Int) >= 4).map(_ => 2))
+
+  var N = 10
+  val ans = for
+    x <- 2 to N
+    y <- 2 to x
+    if x % y == 0
+  yield (x, y)
+  println(ans)
+
+
+  def getFactors(N: Int): IndexedSeq[(Int, Int)] =
+    (2 to N).flatMap(x => {
+      (2 to x)
+        .filter(y => (x % y == 0))
+        .map((x -> _))
+    })
+
+  println(getFactors(3))
+  println(getFactors(10))
 }
