@@ -2,6 +2,8 @@ package com.akarsh.learning
 
 
 import Planet.{Earth, Mercury, Venus}
+
+import scala.annotation.tailrec
 import scala.util.Random
 
 def getPlanetIndex(planet: Planet) = {
@@ -44,6 +46,21 @@ def main(): Unit = {
   do
     println(s"i = $i, j = $j, k = $k")
 
+  var i = 0
+  while(i <= 10) do
+    println(s"$i ${"." * i}")
+    i += 1
+
+  @tailrec
+  def printer(x:Int):Unit =
+    if(x == 0) then
+      println("Boom!!!")
+
+    if(x > 0) then
+      println(x)
+      printer(x-1)
+  printer(3)
+
 
   Planet.values
     .map(planet => (planet, planet.getGravity))
@@ -51,4 +68,7 @@ def main(): Unit = {
 
   println(getPlanetIndex(Earth))
   println(Earth.mass)
+
+
+  collectionExamples()
 }
