@@ -14,7 +14,7 @@ def getPlanetIndex(planet: Planet) = {
 }
 
 @main
-def main(): Unit = {
+def run(): Unit = {
   println("Hello world!")
 
   def nTimes(n:Int) = (value :Int) => {
@@ -54,7 +54,7 @@ def main(): Unit = {
   @tailrec
   def printer(x:Int):Unit =
     if(x == 0) then
-      println("Boom!!!")
+      println(fansi.Color.Red("Boom!!!"))
 
     if(x > 0) then
       println(x)
@@ -64,10 +64,33 @@ def main(): Unit = {
 
   Planet.values
     .map(planet => (planet, planet.getGravity))
-    .foreach((planet:Planet, gravity:Double) => println(s"planet: $planet -> gravity: $gravity"))
+    .foreach((planet:Planet, gravity:Double) => println(fansi.Color.Cyan(s"planet: $planet -> gravity: $gravity")))
 
   println(getPlanetIndex(Earth))
   println(Earth.mass)
+
+  var count = 0
+  def closure(): () => Any =
+    count += 1
+
+    var innerCount = 0
+    def inner(): Unit =
+      innerCount += 1
+      println(s"count: $count, innerCount: $innerCount")
+
+    inner
+
+  val function1 = closure()
+  function1()
+  function1()
+
+  val function2 = closure()
+  function2()
+  function2()
+
+  function1()
+  function2()
+
 
 
   collectionExamples()
