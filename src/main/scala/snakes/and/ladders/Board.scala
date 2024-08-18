@@ -3,7 +3,7 @@ package snakes.and.ladders
 
 import snakes.and.ladders.cell.{Cell, Ladder, Snake}
 
-class Board(players: List[Player], cells: List[List[Cell]]):
+class Board(players: List[Player], cells: List[List[Cell]]) extends BoardGame:
 
   def start(): Unit =
     val N = cells.size
