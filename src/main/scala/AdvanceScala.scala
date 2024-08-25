@@ -85,4 +85,26 @@ object AdvanceScala extends App{
   println(23.even())
   println(MyRichInteger(23).even())
   // can be dangerous so, use carefully
+
+
+  /**
+   * Definition for a binary tree node.
+   */
+
+  class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
+    var value: Int = _value
+    var left: TreeNode = _left
+    var right: TreeNode = _right
+  }
+  
+  object Solution {
+    def postorderTraversal(root: TreeNode): List[Int] = {
+      if root == null then List.empty[Int]
+      else {
+        val left = postorderTraversal(root.left)
+        val right = postorderTraversal(root.right)
+        left ++ right ++ List[Int](root.value)
+      }
+    }
+  }
 }
